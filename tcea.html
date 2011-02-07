@@ -18,7 +18,8 @@
             <ul>
                 <li><a href="#tabs-1">TCEA Presentation</a></li>
                 <li><a href="#tabs-2">Links</a></li>
-                <li><a href="#tabs-3">Contact</a></li>
+                <li><a href="#tabs-3">OpenVPN Help</a></li>
+                <li><a href="#tabs-4">Contact</a></li>
             </ul>
             <div id="tabs-1">
                 Download the TCEA Presentation: <a href="OSS.odp">ODP</a> <a href="OSS.ppt">PPT</a> <a href="OSS.pdf">PDF</a>
@@ -34,10 +35,35 @@
                 <a href="https://help.ubuntu.com/10.10/serverguide/C/index.html">Ubuntu Documenation</a><br />
                 <a href="http://www.libreoffice.org/">LibreOffice</a><br />
                 <a href="https://github.com/korylprince/IPCheck">IPCheck</a><br />
-                <a href="https://github.com/korylprince/OpenVPNWebGUI">OpenVPN Web GUI (Coming Soon)</a><br />
+                <a href="https://github.com/korylprince/OpenVPNWebGUI">OpenVPN Web GUI</a><br />
                 <a href="http://www.osalt.com/">Resource to Find Open Source Alternatives</a><br />
             </div>
             <div id="tabs-3">
+                <p>The things necessary to get the OpenVPN server running in Bridged Mode:<br />
+<br />
+Note: Replace 192.168.0.1 with the internal IP of your OpenVPN server. Replace 1.1.1.1 with the external IP of your OpenVPN Server. Replace 10.16.0.1 with the other internal IP of your OpenVPN server (where 10.16.0.0 is an open subnet.) Clients will get IPs on the 10.16.0.1 subnet.<br />
+<br />
+1. Two ethernet interfaces connected to the switch. eth0 has an IP of 192.168.0.1 (Mapped to external 1.1.1.1)<br />
+   eth1 has an IP of 10.16.0.1.<br />
+2. The Main Switch has a static route for the 10.16.x.x subnet point to 192.168.0.1.<br />
+3. IP forwarding is enabled on the server (In /etc/sysctl.conf.) Make sure the line "net.ipv4.ip_forward=1" exists.<br />
+4. Correct OpenVPN configuration (at /etc/openvpn/server.conf.)<br />
+5. Push the routes to the clients for all the subnets. (Done in /etc/openvpn/server.conf)<br />
+6. Have UDP enabled through the Firewall on port 1194.<br />
+7. Have ethernet Bridge installed correctly (Done in /etc/network/interfaces.)<br />
+8. A line in /etc/rc.local to have the OpenVPN server start on reboot.<br />
+9. Certificates created with easy-rsa. (/etc/openvpn/easy-rsa/) See https://help.ubuntu.com/10.04/serverguide/C/openvpn.html.<br />
+10. Place up.sh and down.sh in /etc/openvpn/</p>
+                <p>Sample Configurations</p>
+                <p><a href="vpn/up.sh">up.sh</a><br />
+                    <a href="vpn/down.sh">down.sh</a><br />
+                    <a href="vpn/interfaces">interfaces</a><br />
+                    <a href="vpn/server.conf">server.conf</a><br />
+                </p>
+                <p>Web Interface</p>
+                <a href="https://github.com/korylprince/OpenVPNWebGUI">OpenVPN Web GUI</a>
+            </div>
+            <div id="tabs-4">
                 <p>If you have any questions or need help with one of my projects don't hesitate to <a href="mailto:korylprince@gmail.com">contact me</a>.</p>
             </div>
         </div>
